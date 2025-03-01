@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
+// const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if a user with the same email already exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -37,7 +36,7 @@ export async function POST(request: NextRequest) {
         username,
         email,
         password: hashedPassword,
-        balance: 0, // initial wallet balance can be set to 0
+        balance: 0,
       },
     });
 
