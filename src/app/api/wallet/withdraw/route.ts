@@ -17,13 +17,13 @@ export async function POST(request: NextRequest) {
         id: user.id,
       },
     });
+    const { amount } = await request.json();
     if (!currentUser || currentUser.balance < amount) {
       return NextResponse.json(
         { error: "Insufficient balance" },
         { status: 400 }
       );
     }
-    const { amount } = await request.json();
     if (!amount || amount <= 0) {
       return NextResponse.json(
         { error: "Invalid withdrawal amount" },
