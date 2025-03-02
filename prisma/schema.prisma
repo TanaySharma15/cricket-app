@@ -74,6 +74,7 @@ model Bet{
   matchId String
   player Player @relation(fields: [playerId], references: [id])
   playerId String
+  selectedTeam  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
