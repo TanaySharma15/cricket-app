@@ -40,8 +40,12 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json({ success: true, data: user }, { status: 201 });
+    return NextResponse.json(
+      { success: true, data: user, message: "User registered successfully" },
+      { status: 201 }
+    );
   } catch (error: any) {
+    console.error(error);
     return NextResponse.json(
       { error: error.message || "Something went wrong" },
       { status: 500 }
